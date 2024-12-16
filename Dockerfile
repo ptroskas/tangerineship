@@ -24,3 +24,14 @@ RUN chown -R www-data:www-data /var/www/html \
 EXPOSE 9000
 CMD ["php-fpm"]
 
+# Instala extensiones necesarias
+RUN apt-get update && apt-get install -y nginx
+
+# Copia configuración de Nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expone el puerto 80
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+
